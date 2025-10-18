@@ -57,7 +57,7 @@ def validar_producto(data, es_actualizacion=False):
     
     return True, "OK"
 
-# ENDPOINT 1: POST /productos - Crear nuevo producto
+# POST /productos - Crear nuevo producto
 @app.route('/productos', methods=['POST'])
 def crear_producto():
     try:
@@ -89,7 +89,7 @@ def crear_producto():
     except Exception as e:
         return jsonify({'error': f'Error interno del servidor: {str(e)}'}), 500
 
-# ENDPOINT 2: GET /productos - Listar todos los productos
+#  GET /productos - Listar todos los productos
 @app.route('/productos', methods=['GET'])
 def obtener_productos():
     try:
@@ -98,7 +98,7 @@ def obtener_productos():
     except Exception as e:
         return jsonify({'error': f'Error al cargar productos: {str(e)}'}), 500
 
-# ENDPOINT 3: GET /productos/<id> - Obtener producto por ID
+#  GET /productos/<id> - Obtener producto por ID
 @app.route('/productos/<int:producto_id>', methods=['GET'])
 def obtener_producto(producto_id):
     try:
@@ -113,7 +113,7 @@ def obtener_producto(producto_id):
     except Exception as e:
         return jsonify({'error': f'Error al buscar producto: {str(e)}'}), 500
 
-# ENDPOINT 4: PUT /productos/<id> - Actualizar producto
+# PUT /productos/<id> - Actualizar producto
 @app.route('/productos/<int:producto_id>', methods=['PUT'])
 def actualizar_producto(producto_id):
     try:
@@ -177,9 +177,8 @@ def index():
     return jsonify({'mensaje': 'API Flask para Gestión de Inventario', 'estado': 'Activo'})
 
 if __name__ == '__main__':
-    # Asegurarse de que el archivo exista
     if not os.path.exists(INVENTARIO_FILE):
         guardar_productos([])
     
-    print("🚀 Iniciando servidor Flask en http://localhost:5000")
+    print("Iniciando servidor Flask en http://localhost:5000")
     app.run(debug=True, port=5000)
