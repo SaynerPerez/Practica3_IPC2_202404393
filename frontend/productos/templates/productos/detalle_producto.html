@@ -1,0 +1,59 @@
+{% extends 'productos/base.html' %}
+
+{% block title %}Detalle: {{ producto.nombre }}{% endblock %}
+{% block titulo_pagina %}Detalle: {{ producto.nombre }}{% endblock %}
+
+{% block botones_superiores %}
+    <div>
+        <a href="{% url 'actualizar_producto' producto.id %}" class="btn btn-warning">✏️ Editar</a>
+        <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger">🗑️ Eliminar</a>
+        <a href="{% url 'lista_productos' %}" class="btn btn-secondary">← Volver</a>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Información Básica</h5>
+                        <p><strong>ID:</strong> {{ producto.id }}</p>
+                        <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+                        <p><strong>Categoría:</strong> {{ producto.categoria }}</p>
+                        <p><strong>Precio:</strong> Q{{ producto.precio }}</p>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h5>Inventario</h5>
+                        <p>
+                            <strong>Stock:</strong> 
+                            <span class="badge {% if producto.cantidad_stock > 10 %}bg-success{% elif producto.cantidad_stock > 0 %}bg-warning{% else %}bg-danger{% endif %}">
+                                {{ producto.cantidad_stock }} unidades
+                            </span>
+                        </p>
+                        
+                        {% if producto.fecha_vencimiento %}
+                        <p><strong>Vencimiento:</strong> {{ producto.fecha_vencimiento }}</p>
+                        {% else %}
+                        <p><strong>Vencimiento:</strong> <em>No aplica</em></p>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <h5>Descripción</h5>
+                <p class="text-muted">
+                    {% if producto.descripcion %}
+                        {{ producto.descripcion }}
+                    {% else %}
+                        <em>Sin descripción</em>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

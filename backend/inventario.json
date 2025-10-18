@@ -1,0 +1,11 @@
+[
+    {
+        "id": 2,
+        "nombre": "jamon",
+        "categoria": "carne",
+        "descripcion": "para un pan",
+        "precio": 78.0,
+        "cantidad_stock": 1,
+        "fecha_vencimiento": "2025-10-26"
+    }
+]
